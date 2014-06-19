@@ -8,6 +8,7 @@
 
 #import "PhotosViewController.h"
 #import "PhotoCell.h"
+#import <SimpleAuth/SimpleAuth.h>
 
 @interface PhotosViewController ()
 
@@ -33,6 +34,10 @@ static NSString * const reuseIdentifier = @"Cell";
     self.title = @"家装商城";
     [self.collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"photo"];
     self.collectionView.backgroundColor = [UIColor blackColor];
+    
+    [SimpleAuth authorize:@"instagram" completion:^(id responseObject, NSError *error) {
+        NSLog(@"response: %@", responseObject);
+    }];
 }
 
 
