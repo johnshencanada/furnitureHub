@@ -7,6 +7,7 @@
 //
 
 #import "PhotosViewController.h"
+#import "PhotoCell.h"
 
 @interface PhotosViewController ()
 
@@ -19,7 +20,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (instancetype)init
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    layout.itemSize = CGSizeMake(320, 250);
+    layout.itemSize = CGSizeMake(320, 320);
     layout.minimumInteritemSpacing = 1.0;
     layout.minimumLineSpacing = 2.0;
     self = [super initWithCollectionViewLayout:layout];
@@ -29,7 +30,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"photo"];
+    self.title = @"家装商城";
+    [self.collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"photo"];
     self.collectionView.backgroundColor = [UIColor blackColor];
 }
 

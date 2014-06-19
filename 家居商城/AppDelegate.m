@@ -19,9 +19,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[[PhotosViewController alloc]init]];
-    self.window.rootViewController = navController;
     
+    PhotosViewController *photosVC = [[PhotosViewController alloc]init];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:photosVC];
+    
+    UINavigationBar *navbar = navController.navigationBar;
+    navbar.barTintColor = [UIColor blackColor];
+    navbar.barStyle = UIBarStyleBlackOpaque;
+    
+    self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

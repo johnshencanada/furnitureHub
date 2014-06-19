@@ -12,6 +12,7 @@
 		52F1A3D11952F377007340E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F1A3D01952F377007340E6 /* Images.xcassets */; };
 		52F1A3DD1952F377007340E6 /* ____Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1A3DC1952F377007340E6 /* ____Tests.m */; };
 		52F1A3E81952F5AA007340E6 /* PhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1A3E71952F5AA007340E6 /* PhotosViewController.m */; };
+		52F1A3EB19539521007340E6 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1A3EA19539521007340E6 /* PhotoCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,8 @@
 		52F1A3DC1952F377007340E6 /* ____Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "____Tests.m"; sourceTree = "<group>"; };
 		52F1A3E61952F5AA007340E6 /* PhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosViewController.h; sourceTree = "<group>"; };
 		52F1A3E71952F5AA007340E6 /* PhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosViewController.m; sourceTree = "<group>"; };
+		52F1A3E919539521007340E6 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		52F1A3EA19539521007340E6 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 				52F1A3CE1952F377007340E6 /* AppDelegate.m */,
 				52F1A3E61952F5AA007340E6 /* PhotosViewController.h */,
 				52F1A3E71952F5AA007340E6 /* PhotosViewController.m */,
+				52F1A3E919539521007340E6 /* PhotoCell.h */,
+				52F1A3EA19539521007340E6 /* PhotoCell.m */,
 				52F1A3D01952F377007340E6 /* Images.xcassets */,
 				52F1A3C91952F377007340E6 /* Supporting Files */,
 			);
@@ -210,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52F1A3EB19539521007340E6 /* PhotoCell.m in Sources */,
 				52F1A3CF1952F377007340E6 /* AppDelegate.m in Sources */,
 				52F1A3E81952F5AA007340E6 /* PhotosViewController.m in Sources */,
 				52F1A3CC1952F377007340E6 /* main.m in Sources */,
