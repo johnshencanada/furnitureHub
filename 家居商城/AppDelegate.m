@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "NavController.h"
+#import "CameraViewController.h"
 #import "PhotosViewController.h"
+#import "UserViewController.h"
 #import <SimpleAuth/SimpleAuth.h>
 
 @interface AppDelegate ()
@@ -19,22 +22,27 @@
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SimpleAuth.configuration[@"instagram"] = @{
        @"client_id" : @"d69504e7817041f2a665dd30c39bc387",
        SimpleAuthRedirectURIKey : @"photobombers://auth/instagram"
        };
     
+
+    UITabBarController *tabBarController = [[UITabBarController alloc]init];
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    CameraViewController * cameraVC = [[CameraViewController alloc]init];
+    NavController *cameraNavController = [[NavController alloc]initWithRootViewController:cameraVC];
     PhotosViewController *photosVC = [[PhotosViewController alloc]init];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:photosVC];
-    
-    UINavigationBar *navbar = navController.navigationBar;
-    navbar.barTintColor = [UIColor blackColor];
-    navbar.barStyle = UIBarStyleBlackOpaque;
-    
-    self.window.rootViewController = navController;
+    NavController *photosNavController = [[NavController alloc]initWithRootViewController:photosVC];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"b" bundle:nil];
+    UserViewController * usersVC = [sb instantiateViewControllerWithIdentifier:@"SignInView"];
+    NavController *usersNavController = [[NavController alloc]initWithRootViewController:usersVC];
+
+    NSArray *controllers = [NSArray arrayWithObjects:cameraNavController, photosNavController, usersNavController, nil];
+    tabBarController.viewControllers = controllers;
+
+    self.window.rootViewController = tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

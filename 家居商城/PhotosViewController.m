@@ -11,6 +11,7 @@
 #import <SimpleAuth/SimpleAuth.h>
 
 @interface PhotosViewController ()
+@property (nonatomic) NSString *accessToken;
 
 @end
 
@@ -20,6 +21,10 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (instancetype)init
 {
+    UIImage *photo = [UIImage imageNamed:@"photo"];
+    UITabBarItem *photoTab = [[UITabBarItem alloc] initWithTitle:@"Photos" image:photo tag:0];
+    self.tabBarItem = photoTab;
+
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(320, 320);
     layout.minimumInteritemSpacing = 1.0;
@@ -31,13 +36,32 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"家装商城";
+    self.title = @"Photos";
+
     [self.collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"photo"];
     self.collectionView.backgroundColor = [UIColor blackColor];
     
-    [SimpleAuth authorize:@"instagram" completion:^(id responseObject, NSError *error) {
-        NSLog(@"response: %@", responseObject);
-    }];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    self.accessToken = [userDefault objectForKey:@"accessToken"];
+    
+    if (self.accessToken == nil) {
+        
+    } else {
+        NSLog(@"Signed in!");
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/tags/livingroom/media/recent?access_token=%@",self.accessToken];
+        NSURL *url = [[NSURL alloc]initWithString:urlString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            
+            NSData *data = [[NSData alloc]initWithContentsOfURL:location];
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            NSLog(@"response: %@",responseDictionary);
+        }];
+        [task resume];
+        NSLog(@"token: %@",self.accessToken);
+    }
 }
 
 
