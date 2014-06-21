@@ -12,7 +12,7 @@
 
 @interface PhotosViewController ()
 @property (nonatomic) NSString *accessToken;
-
+@property (nonatomic) NSArray *photos;
 @end
 
 @implementation PhotosViewController
@@ -41,27 +41,35 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"photo"];
     self.collectionView.backgroundColor = [UIColor blackColor];
     
-    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     self.accessToken = [userDefault objectForKey:@"accessToken"];
     
     if (self.accessToken == nil) {
+        NSLog(@"nil access token");
         
     } else {
-        NSLog(@"Signed in!");
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/tags/livingroom/media/recent?access_token=%@",self.accessToken];
-        NSURL *url = [[NSURL alloc]initWithString:urlString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-            
-            NSData *data = [[NSData alloc]initWithContentsOfURL:location];
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-            NSLog(@"response: %@",responseDictionary);
-        }];
-        [task resume];
-        NSLog(@"token: %@",self.accessToken);
+        [self refresh];
     }
+}
+
+- (void) refresh
+{
+    NSLog(@"Signed in!");
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/tags/bedroom/media/recent?access_token=%@",self.accessToken];
+    NSURL *url = [[NSURL alloc]initWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        
+        NSData *data = [[NSData alloc]initWithContentsOfURL:location];
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        self.photos = [responseDictionary valueForKeyPath:@"data"];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+    }];
+    [task resume];
 }
 
 
@@ -86,13 +94,14 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return [self.photos count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photo" forIndexPath:indexPath];
+    PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photo" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor lightGrayColor];
+    cell.photo = self.photos[indexPath.row];
     return cell;
 }
 

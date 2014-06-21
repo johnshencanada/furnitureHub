@@ -11,9 +11,10 @@
 @interface UserViewController()
 @property (nonatomic) NSString *accessToken;
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
-@property (strong, nonatomic) IBOutlet UILabel *mediaLabel;
-@property (strong, nonatomic) IBOutlet UILabel *followersLabel;
-@property (strong, nonatomic) IBOutlet UILabel *followingLabel;
+@property (strong, nonatomic) IBOutlet UIButton *mediaButton;
+@property (strong, nonatomic) NSString  *media;
+@property (strong, nonatomic) IBOutlet UIButton *followersButton;
+@property (strong, nonatomic) IBOutlet UIButton *followingButton;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
@@ -29,7 +30,10 @@
     
 }
 
-
+- (void)setMedia:(NSString *)media
+{
+    _media = media;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,17 +49,20 @@
             NSArray *data = [rawInfo valueForKey:@"data"];
             NSArray *counts = [data valueForKey:@"counts"];
     
-//            //[self setMedia:[counts valueForKey:@"media"]];
+            [self setMedia:[counts valueForKey:@"media"]];
+            [userDefault setObject:responseObject[@"credentials"][@"token"] forKey:@"accessToken"];
+            [userDefault synchronize];
+            
+            NSArray *user_info = [responseObject valueForKey:@"user_info"];
+            NSString *userName = [user_info valueForKey:@"username"];
+            self.title = userName;
+
 //            NSString *following = [counts valueForKey:@"follows"];
 //            NSString *followers = [counts valueForKey:@"followed_by"];
-//            NSArray *user_info = [responseObject valueForKey:@"user_info"];
 //            NSURL *profile = [user_info valueForKey:@"image"];
 //            NSString *name = [user_info valueForKey:@"name"];
-//            NSString *userName = [user_info valueForKey:@"username"];
-//            self.title = userName;
 
-//            [userDefault setObject:responseObject[@"credentials"][@"token"] forKey:@"accessToken"];
-//            [userDefault synchronize];
+
         }];
     } else {
         NSLog(@"Signed in!");
