@@ -7,75 +7,92 @@
 //
 
 #import "ExploreCollectionViewController.h"
+#import "PhotoCell.h"
+#import <SimpleAuth/SimpleAuth.h>
 
 @interface ExploreCollectionViewController ()
-
+@property (nonatomic) NSString *accessToken;
+@property (nonatomic) NSArray *photos;
 @end
 
 @implementation ExploreCollectionViewController
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+
+    UIImage *photo = [UIImage imageNamed:@"explore"];
+    UITabBarItem *photoTab = [[UITabBarItem alloc] initWithTitle:@"Explore" image:photo tag:0];
+    self.tabBarItem = photoTab;
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    layout.itemSize = CGSizeMake(106, 106);
+    layout.minimumInteritemSpacing = 1.0;
+    layout.minimumLineSpacing = 1.0;
+    self = [super initWithCollectionViewLayout:layout];
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Explore";
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self.collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"photo"];
+    self.collectionView.backgroundColor = [UIColor blackColor];
     
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    self.accessToken = [userDefault objectForKey:@"accessToken"];
     
-    // Do any additional setup after loading the view.
+    if (self.accessToken == nil) {
+        NSLog(@"nil access token");
+        
+    } else {
+        [self refresh];
+    }
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void) refresh
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"Signed in!");
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/tags/livingroom/media/recent?access_token=%@",self.accessToken];
+    NSURL *url = [[NSURL alloc]initWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        
+        NSData *data = [[NSData alloc]initWithContentsOfURL:location];
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        self.photos = [responseDictionary valueForKeyPath:@"data"];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+    }];
+    [task resume];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-#warning Incomplete method implementation -- Return the number of sections
-    return 0;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation -- Return the number of items in the section
-    return 0;
+    return [self.photos count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
+    PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photo" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.photo = self.photos[indexPath.row];
     return cell;
 }
 

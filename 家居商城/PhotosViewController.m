@@ -56,7 +56,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     NSLog(@"Signed in!");
     NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/tags/bedroom/media/recent?access_token=%@",self.accessToken];
+    NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/tags/bikini/media/recent?access_token=%@",self.accessToken];
     NSURL *url = [[NSURL alloc]initWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {

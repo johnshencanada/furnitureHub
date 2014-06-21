@@ -8,14 +8,20 @@
 
 #import "UserViewController.h"
 #import <SimpleAuth/SimpleAuth.h>
+
 @interface UserViewController()
+
 @property (nonatomic) NSString *accessToken;
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (nonatomic) NSString *profileURL;
 @property (strong, nonatomic) IBOutlet UIButton *mediaButton;
 @property (strong, nonatomic) NSString  *media;
 @property (strong, nonatomic) IBOutlet UIButton *followersButton;
+@property (strong, nonatomic) NSString  *followers;
 @property (strong, nonatomic) IBOutlet UIButton *followingButton;
+@property (strong, nonatomic) NSString  *following;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) NSString  *name;
 
 @end
 
@@ -52,22 +58,29 @@
             [self setMedia:[counts valueForKey:@"media"]];
             [userDefault setObject:responseObject[@"credentials"][@"token"] forKey:@"accessToken"];
             [userDefault synchronize];
-            
+
             NSArray *user_info = [responseObject valueForKey:@"user_info"];
             NSString *userName = [user_info valueForKey:@"username"];
             self.title = userName;
-
-//            NSString *following = [counts valueForKey:@"follows"];
-//            NSString *followers = [counts valueForKey:@"followed_by"];
-//            NSURL *profile = [user_info valueForKey:@"image"];
-//            NSString *name = [user_info valueForKey:@"name"];
-
-
+            
+            self.profileURL = [NSString stringWithFormat:@"%@",[user_info valueForKey:@"image"]];
+            self.following = [counts valueForKey:@"follows"];
+            self.followers = [counts valueForKey:@"followed_by"];
+            self.name = [user_info valueForKey:@"name"];
         }];
+        
+        /* download profile picture */
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+        imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.profileURL]]];
+        
     } else {
         NSLog(@"Signed in!");
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+        imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.profileURL]]];
+        [self.view addSubview:imageView];
+
+
     }
-    
 }
 
 @end

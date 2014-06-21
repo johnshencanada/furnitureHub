@@ -10,6 +10,7 @@
 #import "NavController.h"
 #import "CameraViewController.h"
 #import "PhotosViewController.h"
+#import "ExploreCollectionViewController.h"
 #import "UserViewController.h"
 #import <SimpleAuth/SimpleAuth.h>
 
@@ -35,11 +36,13 @@
     NavController *cameraNavController = [[NavController alloc]initWithRootViewController:cameraVC];
     PhotosViewController *photosVC = [[PhotosViewController alloc]init];
     NavController *photosNavController = [[NavController alloc]initWithRootViewController:photosVC];
+    ExploreCollectionViewController *exploreVC = [[ExploreCollectionViewController alloc]init];
+    NavController *exploreNavController = [[NavController alloc]initWithRootViewController:exploreVC];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"b" bundle:nil];
     UserViewController * usersVC = [sb instantiateViewControllerWithIdentifier:@"SignInView"];
     NavController *usersNavController = [[NavController alloc]initWithRootViewController:usersVC];
 
-    NSArray *controllers = [NSArray arrayWithObjects:cameraNavController, photosNavController, usersNavController, nil];
+    NSArray *controllers = [NSArray arrayWithObjects: photosNavController, exploreNavController,cameraNavController,usersNavController, nil];
     tabBarController.viewControllers = controllers;
 
     self.window.rootViewController = tabBarController;
