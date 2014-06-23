@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1081645C1EAD498F95D449C3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B1C55768894DB489704370 /* libPods.a */; };
+		52581DCD1956DE390077B72C /* JSNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 52581DCC1956DE390077B72C /* JSNetwork.m */; };
+		526BDA9619570250000474F0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 526BDA9519570250000474F0 /* DetailViewController.m */; };
 		5291337E1954EBC400A213C3 /* ExploreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5291337D1954EBC400A213C3 /* ExploreCollectionViewController.m */; };
 		52F1A3CC1952F377007340E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1A3CB1952F377007340E6 /* main.m */; };
 		52F1A3CF1952F377007340E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1A3CE1952F377007340E6 /* AppDelegate.m */; };
@@ -33,6 +35,10 @@
 
 /* Begin PBXFileReference section */
 		04B1C55768894DB489704370 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		52581DCB1956DE390077B72C /* JSNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSNetwork.h; sourceTree = "<group>"; };
+		52581DCC1956DE390077B72C /* JSNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSNetwork.m; sourceTree = "<group>"; };
+		526BDA9419570250000474F0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		526BDA9519570250000474F0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		5291337C1954EBC400A213C3 /* ExploreCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCollectionViewController.h; sourceTree = "<group>"; };
 		5291337D1954EBC400A213C3 /* ExploreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCollectionViewController.m; sourceTree = "<group>"; };
 		52F1A3C61952F377007340E6 /* 家居商城.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "家居商城.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +91,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		52581DC81956DDBC0077B72C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52581DCB1956DE390077B72C /* JSNetwork.h */,
+				52581DCC1956DE390077B72C /* JSNetwork.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		52581DC91956DDDA0077B72C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52F1A3E919539521007340E6 /* PhotoCell.h */,
+				52F1A3EA19539521007340E6 /* PhotoCell.m */,
+				52F1A3F51953AD5F007340E6 /* b.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		52581DCA1956DDE70077B72C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				52F1A3EC1953A9B3007340E6 /* NavController.h */,
+				52F1A3ED1953A9B3007340E6 /* NavController.m */,
+				52F1A3E61952F5AA007340E6 /* PhotosViewController.h */,
+				52F1A3E71952F5AA007340E6 /* PhotosViewController.m */,
+				5291337C1954EBC400A213C3 /* ExploreCollectionViewController.h */,
+				5291337D1954EBC400A213C3 /* ExploreCollectionViewController.m */,
+				526BDA9419570250000474F0 /* DetailViewController.h */,
+				526BDA9519570250000474F0 /* DetailViewController.m */,
+				52F1A3EF1953AAFA007340E6 /* CameraViewController.h */,
+				52F1A3F01953AAFA007340E6 /* CameraViewController.m */,
+				52F1A3F21953AB22007340E6 /* UserViewController.h */,
+				52F1A3F31953AB22007340E6 /* UserViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		52F1A3BD1952F377007340E6 = {
 			isa = PBXGroup;
 			children = (
@@ -110,19 +154,9 @@
 			children = (
 				52F1A3CD1952F377007340E6 /* AppDelegate.h */,
 				52F1A3CE1952F377007340E6 /* AppDelegate.m */,
-				52F1A3EC1953A9B3007340E6 /* NavController.h */,
-				52F1A3ED1953A9B3007340E6 /* NavController.m */,
-				52F1A3EF1953AAFA007340E6 /* CameraViewController.h */,
-				52F1A3F01953AAFA007340E6 /* CameraViewController.m */,
-				5291337C1954EBC400A213C3 /* ExploreCollectionViewController.h */,
-				5291337D1954EBC400A213C3 /* ExploreCollectionViewController.m */,
-				52F1A3E61952F5AA007340E6 /* PhotosViewController.h */,
-				52F1A3E71952F5AA007340E6 /* PhotosViewController.m */,
-				52F1A3E919539521007340E6 /* PhotoCell.h */,
-				52F1A3EA19539521007340E6 /* PhotoCell.m */,
-				52F1A3F21953AB22007340E6 /* UserViewController.h */,
-				52F1A3F31953AB22007340E6 /* UserViewController.m */,
-				52F1A3F51953AD5F007340E6 /* b.storyboard */,
+				52581DC81956DDBC0077B72C /* Model */,
+				52581DC91956DDDA0077B72C /* View */,
+				52581DCA1956DDE70077B72C /* Controller */,
 				52F1A3D01952F377007340E6 /* Images.xcassets */,
 				52F1A3C91952F377007340E6 /* Supporting Files */,
 			);
@@ -289,9 +323,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				52F1A3F41953AB22007340E6 /* UserViewController.m in Sources */,
+				52581DCD1956DE390077B72C /* JSNetwork.m in Sources */,
 				52F1A3EB19539521007340E6 /* PhotoCell.m in Sources */,
 				5291337E1954EBC400A213C3 /* ExploreCollectionViewController.m in Sources */,
 				52F1A3CF1952F377007340E6 /* AppDelegate.m in Sources */,
+				526BDA9619570250000474F0 /* DetailViewController.m in Sources */,
 				52F1A3EE1953A9B3007340E6 /* NavController.m in Sources */,
 				52F1A3F11953AAFA007340E6 /* CameraViewController.m in Sources */,
 				52F1A3E81952F5AA007340E6 /* PhotosViewController.m in Sources */,

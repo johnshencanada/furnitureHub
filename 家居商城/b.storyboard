@@ -113,6 +113,24 @@
             </objects>
             <point key="canvasLocation" x="420" y="208"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="Bcg-FF-18S">
+            <objects>
+                <viewController storyboardIdentifier="detailVC" id="BsU-Sq-YkD" customClass="DetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6oJ-uk-SVq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Awi-LC-3Yh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xLb-xh-WOY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jNY-ok-j7x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="420" y="903"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

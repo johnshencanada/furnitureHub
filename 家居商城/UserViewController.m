@@ -50,7 +50,7 @@
     if (self.accessToken == nil) {
 
         [SimpleAuth authorize:@"instagram" completion:^(NSDictionary *responseObject, NSError *error) {
-            
+            NSLog(@"%@",responseObject);
             NSArray *rawInfo = [responseObject valueForKey:@"raw_info"];
             NSArray *data = [rawInfo valueForKey:@"data"];
             NSArray *counts = [data valueForKey:@"counts"];

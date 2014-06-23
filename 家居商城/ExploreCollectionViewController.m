@@ -53,7 +53,6 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-
 - (void) refresh
 {
     NSLog(@"Signed in!");
@@ -91,8 +90,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photo" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor lightGrayColor];
-    cell.photo = self.photos[indexPath.row];
+    cell.backgroundColor = [UIColor whiteColor];
+    [cell setSize:@"thumbnail"];
+    [cell setPhoto:self.photos[indexPath.row]];
     return cell;
 }
 

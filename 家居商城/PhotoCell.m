@@ -7,17 +7,37 @@
 //
 
 #import "PhotoCell.h"
-#import <SAMCache/SAMCache.h>
+#import "JSNetwork.h"
 
 @implementation PhotoCell
 
+- (void)setSize:(NSString *)size
+{
+    _size = size;
+}
 
 - (void)setPhoto:(NSDictionary *)photo
 {
     _photo = photo;
-    NSURL *url = [[NSURL alloc]initWithString:_photo[@"images"][@"standard_resolution"][@"url"]];
-    [self downloadPhotoWithURL:url];
+    if ([self.size isEqualToString:@"thumbnail"]) {
+        [JSNetwork imageForPhoto:_photo size:@"thumbnail" completion:^(UIImage *image) {
+            self.imageView.image = image;
+        }];
+    }
+    
+    else if ([self.size isEqualToString:@"low_resolution"]) {
+        [JSNetwork imageForPhoto:_photo size:@"low_resolution" completion:^(UIImage *image) {
+            self.imageView.image = image;
+        }];
+    }
+    
+    else {
+        [JSNetwork imageForPhoto:_photo size:@"standard_resolution" completion:^(UIImage *image) {
+            self.imageView.image = image;
+        }];
+    }
 }
+
 
 - (instancetype)initWithFrame:(CGRect)frameRect
 {
@@ -35,28 +55,6 @@
     [super layoutSubviews];
     self.imageView.frame = self.contentView.bounds;
     
-}
-
-- (void)downloadPhotoWithURL:(NSURL *)url
-{
-    NSString *key = [[NSString alloc]initWithFormat:@"%@-standard", self.photo[@"id"]];
-    UIImage *photo = [[SAMCache sharedCache]imageForKey:key];
-    if (photo) {
-        self.imageView.image = photo;
-    }
-    else {
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-            NSData *data = [[NSData alloc]initWithContentsOfURL:location];
-            UIImage *image = [[UIImage alloc]initWithData:data];
-            [[SAMCache sharedCache] setImage:image forKey:key];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.image = image;
-            });
-        }];
-        [task resume];
-    }
 }
 
 @end

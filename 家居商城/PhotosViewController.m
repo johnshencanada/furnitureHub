@@ -55,14 +55,18 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void) refresh
 {
     NSLog(@"Signed in!");
+    NSLog(@"access token: %@",self.accessToken);
+    
     NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/tags/bikini/media/recent?access_token=%@",self.accessToken];
+    NSString *urlString = [[NSString alloc]initWithFormat:@"https://api.instagram.com/v1/users/227141757/media/recent/?access_token=%@",self.accessToken];
     NSURL *url = [[NSURL alloc]initWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
         
         NSData *data = [[NSData alloc]initWithContentsOfURL:location];
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSLog(@"%@",responseDictionary);
         self.photos = [responseDictionary valueForKeyPath:@"data"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -100,7 +104,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photo" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.backgroundColor = [UIColor whiteColor];
+    [cell setSize:@"low_resolution"];
     cell.photo = self.photos[indexPath.row];
     return cell;
 }
