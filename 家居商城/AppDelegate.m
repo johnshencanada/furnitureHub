@@ -31,7 +31,6 @@
     
 
     UITabBarController *tabBarController = [[UITabBarController alloc]init];
-    
     CameraViewController * cameraVC = [[CameraViewController alloc]init];
     NavController *cameraNavController = [[NavController alloc]initWithRootViewController:cameraVC];
     PhotosViewController *photosVC = [[PhotosViewController alloc]init];

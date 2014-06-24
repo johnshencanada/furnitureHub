@@ -10,6 +10,8 @@
 		1081645C1EAD498F95D449C3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B1C55768894DB489704370 /* libPods.a */; };
 		52581DCD1956DE390077B72C /* JSNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 52581DCC1956DE390077B72C /* JSNetwork.m */; };
 		526BDA9619570250000474F0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 526BDA9519570250000474F0 /* DetailViewController.m */; };
+		526BDA991958013C000474F0 /* PresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 526BDA981958013C000474F0 /* PresentDetailTransition.m */; };
+		526BDA9C195811C2000474F0 /* DismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 526BDA9B195811C2000474F0 /* DismissDetailTransition.m */; };
 		5291337E1954EBC400A213C3 /* ExploreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5291337D1954EBC400A213C3 /* ExploreCollectionViewController.m */; };
 		52F1A3CC1952F377007340E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1A3CB1952F377007340E6 /* main.m */; };
 		52F1A3CF1952F377007340E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1A3CE1952F377007340E6 /* AppDelegate.m */; };
@@ -39,6 +41,10 @@
 		52581DCC1956DE390077B72C /* JSNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSNetwork.m; sourceTree = "<group>"; };
 		526BDA9419570250000474F0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		526BDA9519570250000474F0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		526BDA971958013C000474F0 /* PresentDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentDetailTransition.h; sourceTree = "<group>"; };
+		526BDA981958013C000474F0 /* PresentDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentDetailTransition.m; sourceTree = "<group>"; };
+		526BDA9A195811C2000474F0 /* DismissDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissDetailTransition.h; sourceTree = "<group>"; };
+		526BDA9B195811C2000474F0 /* DismissDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissDetailTransition.m; sourceTree = "<group>"; };
 		5291337C1954EBC400A213C3 /* ExploreCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreCollectionViewController.h; sourceTree = "<group>"; };
 		5291337D1954EBC400A213C3 /* ExploreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreCollectionViewController.m; sourceTree = "<group>"; };
 		52F1A3C61952F377007340E6 /* 家居商城.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "家居商城.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +111,10 @@
 			children = (
 				52F1A3E919539521007340E6 /* PhotoCell.h */,
 				52F1A3EA19539521007340E6 /* PhotoCell.m */,
+				526BDA971958013C000474F0 /* PresentDetailTransition.h */,
+				526BDA981958013C000474F0 /* PresentDetailTransition.m */,
+				526BDA9A195811C2000474F0 /* DismissDetailTransition.h */,
+				526BDA9B195811C2000474F0 /* DismissDetailTransition.m */,
 				52F1A3F51953AD5F007340E6 /* b.storyboard */,
 			);
 			name = View;
@@ -324,6 +334,7 @@
 			files = (
 				52F1A3F41953AB22007340E6 /* UserViewController.m in Sources */,
 				52581DCD1956DE390077B72C /* JSNetwork.m in Sources */,
+				526BDA9C195811C2000474F0 /* DismissDetailTransition.m in Sources */,
 				52F1A3EB19539521007340E6 /* PhotoCell.m in Sources */,
 				5291337E1954EBC400A213C3 /* ExploreCollectionViewController.m in Sources */,
 				52F1A3CF1952F377007340E6 /* AppDelegate.m in Sources */,
@@ -332,6 +343,7 @@
 				52F1A3F11953AAFA007340E6 /* CameraViewController.m in Sources */,
 				52F1A3E81952F5AA007340E6 /* PhotosViewController.m in Sources */,
 				52F1A3CC1952F377007340E6 /* main.m in Sources */,
+				526BDA991958013C000474F0 /* PresentDetailTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

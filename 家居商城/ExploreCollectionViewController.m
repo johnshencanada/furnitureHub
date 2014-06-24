@@ -9,8 +9,11 @@
 #import "ExploreCollectionViewController.h"
 #import "PhotoCell.h"
 #import <SimpleAuth/SimpleAuth.h>
+#import "DetailViewController.h"
+#import "PresentDetailTransition.h"
+#import "DismissDetailTransition.h"
 
-@interface ExploreCollectionViewController ()
+@interface ExploreCollectionViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic) NSString *accessToken;
 @property (nonatomic) NSArray *photos;
 @end
@@ -96,7 +99,19 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
+
 #pragma mark <UICollectionViewDelegate>
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *photo = self.photos[indexPath.row];
+    DetailViewController *detailVC = [[DetailViewController alloc]init];
+    detailVC.modalPresentationStyle = UIModalPresentationCustom;
+    detailVC.transitioningDelegate = self;
+    detailVC.photo = photo;
+    [self presentViewController:detailVC animated:YES completion:nil];
+    
+}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
@@ -131,5 +146,16 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 }
 */
+
+#pragma mark <UIViewControllerTransitioningDelegate>
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return [[PresentDetailTransition alloc]init];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed;
+{
+    return [[DismissDetailTransition alloc]init];
+}
 
 @end

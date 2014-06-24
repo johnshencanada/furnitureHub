@@ -22,18 +22,21 @@
     if ([self.size isEqualToString:@"thumbnail"]) {
         [JSNetwork imageForPhoto:_photo size:@"thumbnail" completion:^(UIImage *image) {
             self.imageView.image = image;
+            NSLog(@"thumbnail");
         }];
     }
     
     else if ([self.size isEqualToString:@"low_resolution"]) {
         [JSNetwork imageForPhoto:_photo size:@"low_resolution" completion:^(UIImage *image) {
             self.imageView.image = image;
+            NSLog(@"low");
         }];
     }
     
     else {
         [JSNetwork imageForPhoto:_photo size:@"standard_resolution" completion:^(UIImage *image) {
             self.imageView.image = image;
+            NSLog(@"standard");
         }];
     }
 }

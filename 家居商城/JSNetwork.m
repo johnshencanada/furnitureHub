@@ -17,7 +17,7 @@
         return;
     }
     
-    NSString *key = [[NSString alloc]initWithFormat:@"%@-standard", photo[@"id"]];
+    NSString *key = [[NSString alloc]initWithFormat:@"%@-standard-%@", photo[@"id"], size];
     UIImage *image = [[SAMCache sharedCache]imageForKey:key];
     if (image) {
         completion(image);

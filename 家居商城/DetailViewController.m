@@ -6,43 +6,46 @@
 //  Copyright (c) 2014 Banana Technology. All rights reserved.
 //
 
+#import "JSNetwork.h"
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic) UIScrollView *scrollView;
+@property (nonatomic) UIDynamicAnimator *animator;
 @end
 
 @implementation DetailViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)viewWillAppear:(BOOL)animated
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.95];
+    [JSNetwork imageForPhoto:self.photo size:@"standard_resolution" completion:^(UIImage *image) {
+        self.imageView.image = image;
+    }];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.frame];
+    self.scrollView.contentSize = self.imageView? self.imageView.image.size : CGSizeZero;
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0.0, -320.0, 320.0f, 320.0f)];
+    [self.scrollView addSubview:self.imageView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(close)];
+    tap.numberOfTapsRequired = 1;
+    [self.scrollView addGestureRecognizer:tap];
+    [self.view addSubview:self.scrollView];
+    self.animator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
+    UISnapBehavior *snap = [[UISnapBehavior alloc]initWithItem:self.imageView snapToPoint:self.view.center];
+    [self.animator addBehavior:snap];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)close
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
